@@ -9,8 +9,9 @@ function Search({handleSubmitList}) {
     fetch('http://localhost:6001/listings')
     .then(res => res.json())
     .then(data => {
-      const newListings = data.filter(listing => listing.description.toLowerCase().includes(e.target.search.value.toLowerCase()))
-      handleSubmitList(newListings)
+      // const newListings = data.filter(listing => listing.description.toLowerCase().includes(e.target.search.value.toLowerCase()))
+      // handleSubmitList(newListings)
+      handleSubmitList(e, data)
     })
   }
 

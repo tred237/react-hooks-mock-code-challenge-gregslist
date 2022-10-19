@@ -16,14 +16,19 @@ function App() {
     setListings(newListings)
   }
 
-  function handleSubmitList(listObj){
+  function handleSubmitList(e, listObj){
+    const newListings = listObj.filter(listing => listing.description.toLowerCase().includes(e.target.search.value.toLowerCase()))
+    setListings(newListings)
+  }
+
+  function handleSort(listObj){
     setListings(listObj)
   }
 
   return (
     <div className="app">
       <Header handleSubmitList={handleSubmitList}/>
-      <ListingsContainer listings={listings} onDelete={handleDelete}/>
+      <ListingsContainer listings={listings} onDelete={handleDelete} onSort={handleSort}/>
     </div>
   );
 }
