@@ -1,10 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 
-function Search() {
+function Search({handleSubmitList}) {
+  const [searchData, setSearchData] = useState('')
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
+
+    fetch('http://localhost:6001/listings')
+    .then(res => res.json())
+    .then(data => {
+      const newListings = data.filter(listing => listing.description.toLowerCase().includes(e.target.search.value.toLowerCase()))
+      handleSubmitList(newListings)
+    })
   }
+
+  console.log(searchData)
 
   return (
     <form className="searchbar" onSubmit={handleSubmit}>
@@ -12,8 +22,8 @@ function Search() {
         type="text"
         id="search"
         placeholder="search free stuff"
-        value={""}
-        onChange={(e) => console.log(e.target.value)}
+        value={searchData}
+        onChange={(e) => setSearchData(e.target.value)}
       />
       <button type="submit">🔍</button>
     </form>
