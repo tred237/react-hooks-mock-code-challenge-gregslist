@@ -6,10 +6,14 @@ function App() {
   const [listings, setListings] = useState([])
 
   useEffect(() => {
+    pullItemData()
+  }, [])
+
+  function pullItemData(){
     fetch('http://localhost:6001/listings')
     .then(res => res.json())
     .then(data => setListings(data))
-  }, [])
+  }
 
   function handleDelete(listingObj){
     const newListings = listings.filter(listing => listing.id !== listingObj.id)
@@ -27,7 +31,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header handleSubmitList={handleSubmitList}/>
+      <Header handleSubmitList={handleSubmitList} onItemSubmit={pullItemData}/>
       <ListingsContainer listings={listings} onDelete={handleDelete} onSort={handleSort}/>
     </div>
   );

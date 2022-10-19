@@ -1,7 +1,8 @@
 import React from "react";
 import Search from "./Search";
+import NewItem from "./NewItem";
 
-function Header({handleSubmitList}) {
+function Header({ handleSubmitList, onItemSubmit}) {
   return (
     <header>
       <h1>
@@ -10,6 +11,7 @@ function Header({handleSubmitList}) {
         </span>
         gregslist
       </h1>
+      <NewItem onItemSubmit={onItemSubmit}/>
       <Search handleSubmitList={handleSubmitList}/>
     </header>
   );
